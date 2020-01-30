@@ -144,6 +144,8 @@ export default class General{
         // this.setX( 200 );
         // this.setY( 0 );
         BlockStore.refreshBlock();
+
+        console.log('dev');
         
 
     }
