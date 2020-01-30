@@ -28,6 +28,10 @@ export default class General{
             }
         }
 
+        if(this.checkCollision(this.x, this.y, newShape)){
+            return false;
+        }
+
         this.shape = newShape;
 
     }
@@ -54,25 +58,63 @@ export default class General{
             tmpX = this.x;
 
         }
-        if(tmpY/AppStore.side == AppStore.ySize){
 
-            this.freeze();
-            return 0;
+    }
 
+    move(size, direction = 'down'){
+
+        let nextX = this.x;
+        let nextY = this.y;
+
+        switch(direction){
+            case 'up':
+                nextY -= size;
+                break;
+            case 'down':
+                nextY += size;
+                break;
+            case 'left':
+                nextX -= size;
+                break;
+            case 'right':
+                    nextX += size;
+                break;
         }
 
-        const posX = this.x / AppStore.side;
-        const posY = this.y / AppStore.side + this.shape.length;
-
-        for(let i = this.shape.length-1; i >= 0 ; i--){
-
-            for(let j = 0; j < this.shape[i].length; j++){
-
-
-                if( AppStore.field[posY - i][posX + j] == 1 && this.shape[(this.shape.length-1)-i][j] == 1 ){
-
+        if(this.checkCollision(nextX, nextY)){
+            switch(direction){
+                case 'down':
                     this.freeze();
-                    return 0;
+                    break;
+                default:
+                    return false;
+            }
+        }else{
+            this.x = nextX;
+            this.y = nextY;
+        }
+    }
+
+    checkCollision(nextX, nextY, shape = this.shape){
+
+        if( (nextX < 0 ) || ( nextY < 0 ) ){
+            return true;
+        }
+
+        const posX = nextX / AppStore.side;
+        const posY = nextY / AppStore.side;
+
+        if( (posY + shape.length > AppStore.ySize ) || (posX + shape[0].length > AppStore.xSize ) ){
+            return true;
+        }
+
+        for(let i = 0; i < shape.length ; i++){
+
+            for(let j = 0; j < shape[i].length; j++){
+
+                if( AppStore.field[posY + i][posX + j] == 1 && shape[i][j] == 1 ){
+
+                    return true;
 
                 }
 
@@ -80,52 +122,8 @@ export default class General{
 
         }
 
-    }
+        return false;
 
-    move(size, direction = 'down'){
-        let positionCell;
-        switch(direction){
-            case 'up':
-                this.y -= size;
-                break;
-            case 'down':
-                this.y += size;
-                break;
-            case 'left':
-                for(let i = 0; i < this.shape.length; i++){
-                    for(let j = 0; j < this.shape[i].length; j++){
-                        if( this.shape[i][j] == 1 ){
-                            let xPos = this.x / size;
-                            let yPos = this.y / size;
-                            if(AppStore.field[yPos+i][ xPos + (j-1) ] == 1){
-                                return;
-                            }
-                        }
-                    }
-                }
-                positionCell = this.x / size;
-                if(positionCell >= 1 && positionCell < AppStore.xSize){
-                    this.x -= size;
-                }
-                break;
-            case 'right':
-                for(let i = 0; i < this.shape.length; i++){
-                    for(let j = this.shape[i].length-1; j > 0; j--){
-                        if( this.shape[i][j] == 1 ){
-                            let xPos = this.x / size;
-                            let yPos = this.y / size;
-                            if(AppStore.field[yPos+i][ xPos + (j+1) ] == 1){
-                                return;
-                            }
-                        }
-                    }
-                }
-                positionCell = this.x / size + this.shape[0].length;
-                if(positionCell >= 1 && positionCell < AppStore.xSize){
-                    this.x += size;
-                }
-                break;
-        }
     }
 
     freeze(){
@@ -141,12 +139,7 @@ export default class General{
             }
         }
 
-        // this.setX( 200 );
-        // this.setY( 0 );
         BlockStore.refreshBlock();
-
-        console.log('dev');
-        
 
     }
 
