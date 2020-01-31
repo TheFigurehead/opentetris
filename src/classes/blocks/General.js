@@ -7,6 +7,8 @@ export default class General{
         this.x = x;
         this.y = y;
         this.shape = shape;
+        this.color = '#4CAF50';
+        this.borderColor = '#ff7043';
     }
 
     setX(x){
@@ -47,7 +49,7 @@ export default class General{
 
                 if(this.shape[i][j] == 1){
 
-                    drawCell(context, tmpX, tmpY, AppStore.side, 'red', 'green');
+                    drawCell(context, tmpX, tmpY, AppStore.side, this.borderColor, this.color);
 
                 }
 
@@ -112,7 +114,7 @@ export default class General{
 
             for(let j = 0; j < shape[i].length; j++){
 
-                if( AppStore.field[posY + i][posX + j] == 1 && shape[i][j] == 1 ){
+                if( AppStore.field[posY + i][posX + j].value == 1 && shape[i][j] == 1 ){
 
                     return true;
 
@@ -127,19 +129,26 @@ export default class General{
     }
 
     freeze(){
-        
+
         let x = (this.x / AppStore.side);
         let y = (this.y / AppStore.side);
 
         for(let i = this.shape.length - 1; i >= 0; i--){
             for(let j = this.shape[i].length - 1; j >= 0; j--){
                 if(this.shape[i][j] != 0){
-                    AppStore.field[y+i][x+j] = this.shape[i][j];
+                    // console.dir(AppStore.field[y+i][x+j]);
+                    AppStore.field[y+i][x+j] = {
+                        value: 1,
+                        color: this.color,
+                        borderColor: this.borderColor
+                    };
+                    // AppStore.field[y+i][x+j]['color'] = this.color;
+                    // AppStore.field[y+i][x+j]['borderColor'] = this.borderColor;
                 }
             }
         }
 
-        BlockStore.refreshBlock();
+        BlockStore.refreshBlock();         
 
     }
 

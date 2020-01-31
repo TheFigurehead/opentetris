@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const canvas = document.getElementById('tetris');
     canvas.width = AppStore.xSize * AppStore.side;
-    console.log(AppStore.xSize * AppStore.side);
     canvas.height = AppStore.ySize * AppStore.side;
     
     const context = canvas.getContext('2d');
@@ -17,9 +16,6 @@ document.addEventListener('DOMContentLoaded', function(){
         context.rect(x, y, size, size);
         context.fillStyle = fillColor;
         context.fill();
-        // context.font = "20px Arial";
-        // context.fillStyle = "black";
-        // context.fillText( ((x) ? x/size : 0) + ";" + ((y) ? y/size : 0), x+5, y+size-10);
         context.lineWidth = borderSize;
         context.strokeStyle = borderColor;
         context.stroke();
@@ -30,11 +26,11 @@ document.addEventListener('DOMContentLoaded', function(){
         let tmpY = 0;
         
         for(let i = 0; i < AppStore.ySize; i++){
-            for(let j = 0; j < AppStore.ySize; j++){
-                if(AppStore.field[i][j] == 0){
-                    drawCell(context, tmpX, tmpY, AppStore.side);
+            for(let j = 0; j < AppStore.xSize; j++){
+                if(AppStore.field[i][j]['value'] == 0){
+                    drawCell( context, tmpX, tmpY, AppStore.side );
                 }else{
-                    drawCell(context, tmpX, tmpY, AppStore.side, 'red', 'green');
+                    drawCell( context, tmpX, tmpY, AppStore.side, AppStore.field[i][j].borderColor, AppStore.field[i][j].color );
                 }
                 tmpX += AppStore.side;
             }
