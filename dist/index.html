@@ -3,10 +3,33 @@
     <head>
         <title>My awesome tetris</title>
         <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <div class="wrapper">
             <canvas id="tetris"></canvas>
+        </div>
+        <div class="navigation">
+            <div class="moveBlock left arrow" data-direction="left">
+                <span>
+                    <
+                </span>
+            </div>
+            <div class="moveBlock right arrow" data-direction="right">
+                <span>
+                    >
+                </span>
+            </div>
+            <div class="moveBlock down arrow" data-direction="down">
+                <span>
+                    >
+                </span>
+            </div>
+        </div>
+        <div id="panel">
+            My score: <span class="scoreValue">0</span><br>
+            <button id="pause">Pause</button><br>
+            <button id="restart">Restart</button>
         </div>
         <button id="drawBlock">Draw block</button>
         <button class="moveBlock" data-direction="up">⇧</button>

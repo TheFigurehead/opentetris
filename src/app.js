@@ -54,6 +54,16 @@ document.addEventListener('DOMContentLoaded', function(){
         drawBlock(AppStore.side)
     }
     
+    const restart = () => {
+        AppStore.refresh();
+        BlockStore.refresh();
+        drawField(context);
+    }
+
+    const pause = () => {
+        AppStore.toggleActive();
+    }
+    
     drawField(context);
     
     const drawBtn = document.getElementById('drawBlock');
@@ -72,6 +82,14 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     );
     
+    const canvasBlock = document.getElementById('tetris');
+    canvasBlock.addEventListener(
+        'click',
+        ()=>{
+            rotate()
+        }
+    );
+    
     const moveBtns = document.getElementsByClassName('moveBlock');
     for(let k = 0; k < moveBtns.length; k++ ){
         let item = moveBtns[k];
@@ -83,29 +101,52 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         );
     }
+
+    const restartBtn = document.getElementById('restart');
+    restartBtn.addEventListener(
+        'click',
+        ()=>{
+            restart()
+        }
+    );
+
+    const pauseBtn = document.getElementById('pause');
+    pauseBtn.addEventListener(
+        'click',
+        ()=>{
+            pause()
+        }
+    );
+    
     // keyboard events
     document.addEventListener('keydown', (event) => {
         
-        if(event.key == 'ArrowDown'){
-            moveBlock(context, AppStore.side, 'down');
-        }
-        
-        if(event.key == 'ArrowUp'){
-            rotate();
-        }
-        
-        if(event.key == 'ArrowLeft'){
-            moveBlock(context, AppStore.side, 'left');
-        }
-        
-        if(event.key == 'ArrowRight'){
-            moveBlock(context, AppStore.side, 'right');
+        if(AppStore.active){
+
+            if(event.key == 'ArrowDown'){
+                moveBlock(context, AppStore.side, 'down');
+            }
+            
+            if(event.key == 'ArrowUp'){
+                rotate();
+            }
+            
+            if(event.key == 'ArrowLeft'){
+                moveBlock(context, AppStore.side, 'left');
+            }
+            
+            if(event.key == 'ArrowRight'){
+                moveBlock(context, AppStore.side, 'right');
+            }
+
         }
     }, false);
 
     let timerId = setInterval(
     () => {
-        moveBlock(context, AppStore.side, 'down');
-        AppStore.checkField();
+        if(AppStore.active){
+            moveBlock(context, AppStore.side, 'down');
+            AppStore.checkField();
+        }
     }, 1000);
 });

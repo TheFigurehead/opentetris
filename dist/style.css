@@ -6,3 +6,36 @@
 #tetris{
     border: 1px solid #000;
 }
+/* #panel{
+    display: inline-block;
+    padding: 20px;
+    position: fixed;
+    right: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+} */
+
+.navigation{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navigation .arrow{
+    text-align: center;
+    padding: 25px 0;
+    border: 1px solid #000;
+}
+
+.navigation .left,
+.navigation .right{
+    flex-grow: 1;
+}
+
+.navigation .down{
+    flex-basis: 100%;
+}
+
+.navigation .down span{
+    transform: rotate(90deg);
+    display: inline-block;
+}

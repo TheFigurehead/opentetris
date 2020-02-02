@@ -2,16 +2,22 @@ class AppStore {
     constructor(){
 
         if(! AppStore.instance){
-            this.xSize = parseInt(process.env.xSize);
-            this.ySize = parseInt(process.env.ySize);
-            this.side = parseInt(process.env.sideLength);
-            this.defaultFieldCell = {color: '#fff', borderColor: '#000', value: 0};
-            this.field = Array(this.ySize).fill().map(()=>Array(this.xSize).fill(this.defaultFieldCell));
-            AppStore.instance = this;
+            this.setProps();
         }
   
         return AppStore.instance;
 
+    }
+
+    setProps(){
+        this.xSize = parseInt(process.env.xSize);
+        this.ySize = parseInt(process.env.ySize);
+        this.side = parseInt(process.env.sideLength);
+        this.defaultFieldCell = {color: '#fff', borderColor: '#000', value: 0};
+        this.field = Array(this.ySize).fill().map(()=>Array(this.xSize).fill(this.defaultFieldCell));
+        this.active = true;
+        this.score = 0;
+        AppStore.instance = this;
     }
 
     setX(value){
@@ -30,6 +36,10 @@ class AppStore {
         AppStore.instance.field = field;
     }
 
+    toggleActive(){
+        this.active = !this.active;
+    }
+
     checkField(){
         this.field.forEach((item, key)=>{
             let filled = true;
@@ -41,8 +51,18 @@ class AppStore {
             if(filled){
                 this.field.splice(key, 1);
                 this.field.unshift(Array(this.xSize).fill(this.defaultFieldCell));
+                this.setScore();
             }
         });
+    }
+
+    refresh(){
+        this.setProps();
+    }
+
+    setScore(){
+        this.score += parseInt(process.env.points);
+        document.querySelector('.scoreValue').innerHTML = this.score;
     }
   
 }

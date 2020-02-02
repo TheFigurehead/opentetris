@@ -4,13 +4,17 @@ class BlockStore {
     constructor(){
 
         if(! BlockStore.instance){
-            this.blockPicker = new BlockPicker();
-            this.block = this.blockPicker.getRandomBlock(0, 0);
-            BlockStore.instance = this;
+            this.setProps();
         }
   
         return BlockStore.instance;
 
+    }
+
+    setProps(){
+        this.blockPicker = new BlockPicker();
+        this.block = this.blockPicker.getRandomBlock(0, 0);
+        BlockStore.instance = this;
     }
 
     setX(value){
@@ -31,6 +35,10 @@ class BlockStore {
 
     refreshBlock(){
         this.block = this.blockPicker.getRandomBlock(0, 0);
+    }
+
+    refresh(){
+        this.setProps();
     }
   
 }
