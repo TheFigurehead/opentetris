@@ -1,7 +1,11 @@
-.wrapper{
+#wrapper{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
+    -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
 }
 #tetris{
     border: 1px solid #000;
@@ -36,6 +40,49 @@
 }
 
 .navigation .down span{
-    transform: rotate(90deg);
+    /* transform: rotate(90deg); */
+    font-weight: bold;
+    transform: rotate(90deg) scale(2);
     display: inline-block;
+}
+
+#panel{
+    display: inline-flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    /*
+    top: 25px;
+    left: 25px; */
+}
+
+#score{
+    font-size: 26px;
+    padding: 20px 0;
+    display: inline-flex;
+    flex-direction: column;
+    position: fixed;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    width: auto;
+}
+
+#score .scoreValue{
+    display: inline-block;
+    background-color: grey;
+    color: #fff;
+    text-align: center;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+}
+
+#pause img,
+#restart img{
+    width: 25px;
 }

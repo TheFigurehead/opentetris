@@ -6,37 +6,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div class="wrapper">
-            <canvas id="tetris"></canvas>
-        </div>
-        <div class="navigation">
-            <div class="moveBlock left arrow" data-direction="left">
-                <span>
-                    <
-                </span>
+        <div id="wrapper">
+            <div id="panel">
+                <!-- <div class="scoreBlock">
+                    My score: <span class="scoreValue">0</span>
+                </div> -->
+                <button id="pause">
+                    <img src="./icons/rounded-pause-button.svg">
+                </button>
+                <button id="restart">
+                    <img src="./icons/restart.svg">
+                </button>
             </div>
-            <div class="moveBlock right arrow" data-direction="right">
-                <span>
-                    >
-                </span>
+            <div class="tetris_wrapper">
+                <canvas id="tetris"></canvas>
+                <div class="navigation">
+                    <!-- <div class="moveBlock left arrow" data-direction="left">
+                        <span>
+                            <
+                        </span>
+                    </div>
+                    <div class="moveBlock right arrow" data-direction="right">
+                        <span>
+                            >
+                        </span>
+                    </div> -->
+                    <!-- <div class="moveBlock down arrow" data-direction="down">
+                        <span>
+                            >
+                        </span>
+                    </div> -->
+                </div>
             </div>
-            <div class="moveBlock down arrow" data-direction="down">
-                <span>
-                    >
-                </span>
+            <div id="score">
+                <span class="scoreValue">0</span>
+                <span>Next block:</span>
+                <canvas id="nextBlock"></canvas>
             </div>
         </div>
-        <div id="panel">
-            My score: <span class="scoreValue">0</span><br>
-            <button id="pause">Pause</button><br>
-            <button id="restart">Restart</button>
-        </div>
-        <button id="drawBlock">Draw block</button>
+        <!-- <button id="drawBlock">Draw block</button>
         <button class="moveBlock" data-direction="up">⇧</button>
         <button class="moveBlock" data-direction="down">⇩</button>
         <button class="moveBlock" data-direction="left">⇦</button>
         <button class="moveBlock" data-direction="right">⇨</button>
-        <button id="rotate">🔄</button>
+        <button id="rotate">🔄</button> -->
         <script type="module" src="./main.js"></script>
     </body>
 </html>

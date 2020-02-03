@@ -12,12 +12,18 @@ class AppStore {
     setProps(){
         this.xSize = parseInt(process.env.xSize);
         this.ySize = parseInt(process.env.ySize);
-        this.side = parseInt(process.env.sideLength);
+
+        // this.side = parseInt(process.env.sideLength);
+        this.side = Math.floor( ( (window.screen.height / 100) * 70) / this.ySize );
+
         this.defaultFieldCell = {color: '#fff', borderColor: '#000', value: 0};
+
         this.field = Array(this.ySize).fill().map(()=>Array(this.xSize).fill(this.defaultFieldCell));
+
         this.active = true;
         this.score = 0;
         AppStore.instance = this;
+        
     }
 
     setX(value){

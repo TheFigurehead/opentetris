@@ -1,5 +1,6 @@
 import AppStore from '../../AppStore.js';
 import BlockStore from '../../BlockStore.js';
+import DrawTools from '../../DrawTools.js';
 
 export default class General{
 
@@ -38,7 +39,7 @@ export default class General{
 
     }
 
-    draw(context, drawCell){
+    draw(context = DrawTools.context){
 
         let tmpX = this.x;
         let tmpY = this.y;
@@ -49,7 +50,7 @@ export default class General{
 
                 if(this.shape[i][j] == 1){
 
-                    drawCell(context, tmpX, tmpY, AppStore.side, this.borderColor, this.color);
+                    DrawTools.drawCell(context, tmpX, tmpY, AppStore.side, this.borderColor, this.color);
 
                 }
 
