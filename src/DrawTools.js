@@ -3,15 +3,17 @@ import AppStore from './AppStore';
 class DrawTools{
 
     constructor(){
-        if(! DrawTools.instancev){
+        if(! DrawTools.instance ){
             this.setProps();
         }
+        return DrawTools.instance;
     }
 
     setProps(){
         this.canvas = document.getElementById('tetris');
         this.setResolution();
         this.context = this.canvas.getContext('2d');
+        DrawTools.instance = this;
     }
 
     setResolution(){

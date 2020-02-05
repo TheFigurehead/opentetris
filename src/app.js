@@ -1,33 +1,11 @@
 import AppStore from './AppStore.js';
-import BlockStore from './BlockStore.js';
 import DrawTools from './DrawTools.js';
+import BlockStore from './BlockStore.js';
+import TouchHandler from './TouchHandler.js';
 
 document.addEventListener('DOMContentLoaded', function(){
-    
-    const drawBlock = (size) => {
-        DrawTools.drawField();
-        BlockStore.block.draw();
-    }
-    
-    const moveBlock = (size, direction = 'down') => {
-        BlockStore.block.move(size, direction);
-        drawBlock(size);
-    }
-    
-    const rotate = () => {
-        BlockStore.block.rotate();
-        drawBlock(AppStore.side)
-    }
-    
-    const restart = () => {
-        AppStore.refresh();
-        BlockStore.refresh();
-        DrawTools.drawField();
-    }
 
-    const pause = () => {
-        AppStore.toggleActive();
-    }
+    const touchHandler = new TouchHandler();
     
     DrawTools.drawField();
     
@@ -38,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function(){
         item.addEventListener(
             'click',
             ()=>{
-                moveBlock(AppStore.side, direction)
+                BlockStore.moveBlock(AppStore.side, direction)
             }
         );
     }
@@ -47,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
     restartBtn.addEventListener(
         'click',
         ()=>{
-            restart()
+            BlockStore.restart()
         }
     );
 
@@ -55,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
     pauseBtn.addEventListener(
         'click',
         ()=>{
-            pause()
+            BlockStore.pause()
         }
     );
     
@@ -65,19 +43,19 @@ document.addEventListener('DOMContentLoaded', function(){
         if(AppStore.active){
 
             if(event.key == 'ArrowDown'){
-                moveBlock(AppStore.side, 'down');
+                BlockStore.moveBlock(AppStore.side, 'down');
             }
             
             if(event.key == 'ArrowUp'){
-                rotate();
+                BlockStore.rotate();
             }
             
             if(event.key == 'ArrowLeft'){
-                moveBlock(AppStore.side, 'left');
+                BlockStore.moveBlock(AppStore.side, 'left');
             }
             
             if(event.key == 'ArrowRight'){
-                moveBlock(AppStore.side, 'right');
+                BlockStore.moveBlock(AppStore.side, 'right');
             }
 
         }
@@ -86,90 +64,9 @@ document.addEventListener('DOMContentLoaded', function(){
     let timerId = setInterval(
     () => {
         if(AppStore.active){
-            moveBlock(AppStore.side, 'down');
+            BlockStore.moveBlock(AppStore.side, 'down');
             AppStore.checkField();
         }
     }, 1000);
-
-    document.addEventListener('touchstart', handleTouchStart, false);        
-    document.addEventListener('touchmove', handleTouchMove, false);
-
-    var xDown = null;                                                        
-    var yDown = null;
-
-    function getTouches(evt) {
-    return evt.touches ||
-            evt.originalEvent.touches;
-    }                                                     
-
-    function handleTouchStart(evt) {
-        const firstTouch = getTouches(evt)[0];                                      
-        xDown = firstTouch.clientX;                                      
-        yDown = firstTouch.clientY;                                      
-    };                                                
-
-    function handleTouchMove(evt) {
-        if ( ! xDown || ! yDown ) {
-            return;
-        }
-
-        var xUp = evt.touches[0].clientX;                                    
-        var yUp = evt.touches[0].clientY;
-
-        var xDiff = xDown - xUp;
-        var yDiff = yDown - yUp;
-
-        if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
-            if ( xDiff > 0 ) {
-                moveBlock(AppStore.side, 'left')
-            } else {
-                moveBlock(AppStore.side, 'right')
-            }                       
-        } else {
-            if ( yDiff > 0 ) {
-                rotate(); 
-            } else { 
-                moveBlock(AppStore.side, 'down')
-            }                                                                 
-        }
-
-        xDown = null;
-        yDown = null;                                             
-    };
-
-    var interval;
-
-    const onlongtouch = () => {
-        interval = setInterval(
-        () => {
-            if(AppStore.active){
-                moveBlock(AppStore.side, 'down');
-                AppStore.checkField();
-            }
-        }, 100);
-    }
-
-    var timer, lockTimer;
-    var touchduration = 300;
-
-    function touchstart(e) {
-        e.preventDefault();
-        if(lockTimer){
-            return;
-        }
-        timer = setTimeout(onlongtouch, touchduration); 
-        lockTimer = true;
-    }
-
-    function touchend() {
-        if (timer){
-            clearTimeout(timer);
-            clearInterval(interval);
-            lockTimer = false;
-        }
-    }
-
-    document.addEventListener('touchstart', touchstart, false);        
-    document.addEventListener('touchend', touchend, false);
 
 });

@@ -2,7 +2,7 @@ import AppStore from '../../AppStore.js';
 import BlockStore from '../../BlockStore.js';
 import DrawTools from '../../DrawTools.js';
 
-export default class General{
+class General{
 
     constructor(x = 0, y = 0, shape = [[0,1,0],[1,1,1]]){
         this.x = x;
@@ -39,7 +39,7 @@ export default class General{
 
     }
 
-    draw(context = DrawTools.context){
+    draw(context = DrawTools.context, side = AppStore.side){
 
         let tmpX = this.x;
         let tmpY = this.y;
@@ -50,14 +50,14 @@ export default class General{
 
                 if(this.shape[i][j] == 1){
 
-                    DrawTools.drawCell(context, tmpX, tmpY, AppStore.side, this.borderColor, this.color);
+                    DrawTools.drawCell(context, tmpX, tmpY, side, this.borderColor, this.color);
 
                 }
 
-                tmpX += AppStore.side;
+                tmpX += side;
             }
 
-            tmpY += AppStore.side;
+            tmpY += side;
             tmpX = this.x;
 
         }
@@ -137,14 +137,11 @@ export default class General{
         for(let i = this.shape.length - 1; i >= 0; i--){
             for(let j = this.shape[i].length - 1; j >= 0; j--){
                 if(this.shape[i][j] != 0){
-                    // console.dir(AppStore.field[y+i][x+j]);
                     AppStore.field[y+i][x+j] = {
                         value: 1,
                         color: this.color,
                         borderColor: this.borderColor
                     };
-                    // AppStore.field[y+i][x+j]['color'] = this.color;
-                    // AppStore.field[y+i][x+j]['borderColor'] = this.borderColor;
                 }
             }
         }
@@ -154,3 +151,5 @@ export default class General{
     }
 
 }
+
+export default General;

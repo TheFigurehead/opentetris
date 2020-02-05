@@ -20,7 +20,12 @@
             </div>
             <div class="tetris_wrapper">
                 <canvas id="tetris"></canvas>
-                <div class="navigation">
+                <div id="score">
+                    <span>Next block:</span>
+                    <canvas id="nextBlock"></canvas>
+                    <span>Total score: <span class="scoreValue">0</span> </span>
+                </div>
+                <!-- <div class="navigation"> -->
                     <!-- <div class="moveBlock left arrow" data-direction="left">
                         <span>
                             <
@@ -36,12 +41,7 @@
                             >
                         </span>
                     </div> -->
-                </div>
-            </div>
-            <div id="score">
-                <span class="scoreValue">0</span>
-                <span>Next block:</span>
-                <canvas id="nextBlock"></canvas>
+                <!-- </div> -->
             </div>
         </div>
         <!-- <button id="drawBlock">Draw block</button>
