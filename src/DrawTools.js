@@ -49,6 +49,53 @@ class DrawTools{
         }
     }
 
+    drawEndGame(){
+
+        const text = [
+            {
+                size: '28px',
+                text: 'This is the end...',
+                color: '#1a237e',
+                font: 'Lemonada'
+
+            },
+            {
+                size: '28px',
+                text: 'My only friend, the end...',
+                color: '#1a237e',
+                font: 'Lemonada'
+            },
+            {
+                size: '32px',
+                text: 'Total score:',
+                color: '#3e2723',
+                font: 'Roboto'
+            },
+            {
+                size: '34px',
+                text: AppStore.score,
+                color: '#3e2723',
+                font: 'Roboto'
+            }
+        ];
+
+        const lineHeight = '50';
+        const startPoint = (this.canvas.height / 2) - ( (text.length*lineHeight) / 2 );
+        this.context.filter = 'blur(15px)';
+
+        this.drawField();
+
+        this.context.filter = 'blur(0px)';
+        this.context.textAlign = "center";
+
+        for(let i = 0; i < text.length; i++){
+            this.context.fillStyle = text[i].color;
+            this.context.font = 'normal normal bold ' + text[i].size + ' ' + text[i].font;
+            this.context.fillText( text[i].text, this.canvas.width / 2, startPoint + (i * lineHeight), this.canvas.width - 20);
+        }
+		
+    }
+
 }
 
   

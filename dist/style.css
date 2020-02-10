@@ -24,14 +24,6 @@ html, body{
 #tetris{
     border: 1px solid #000;
 }
-/* #panel{
-    display: inline-block;
-    padding: 20px;
-    position: fixed;
-    right: 200px;
-    top: 50%;
-    transform: translateY(-50%);
-} */
 
 .navigation{
     display: flex;
@@ -54,7 +46,6 @@ html, body{
 }
 
 .navigation .down span{
-    /* transform: rotate(90deg); */
     font-weight: bold;
     transform: rotate(90deg) scale(2);
     display: inline-block;
@@ -68,10 +59,6 @@ html, body{
     top: 0;
     bottom: 0;
     width: 50px;
-
-    /*
-    top: 25px;
-    left: 25px; */
 }
 
 #score{
@@ -80,30 +67,72 @@ html, body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*font-size: 26px;
-    padding: 20px 0;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    right: 10px;
-    top: 0;
-    bottom: 0;
-    width: auto;*/
 }
-
-/* #score .scoreValue{
-    display: inline-block;
-    background-color: grey;
-    color: #fff;
-    text-align: center;
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    border-radius: 50%;
-} */
 
 #pause img,
 #restart img{
     width: 25px;
+}
+
+#instructions.active{
+    opacity: 1;
+    z-index: 999;
+}
+
+#instructions{
+    opacity: 0;
+    z-index: -1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.5);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+#instructions .instructions_content{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+#instructions section{
+    text-align: left;
+}
+
+#instructions img{
+    width: 25px;
+}
+
+#confirm_btn{
+    background-color: #1a237e;
+    color: #fff;
+    padding: 15px;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.3);
+    border: unset;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+#confirm_btn:hover{
+    background-color: #1a237e;
+    color: #fff;
+    padding: 15px;
+    box-shadow: 2px 2px 7px 1px rgba(0,0,0,0.3);
+    border: unset;
+    font-size: 18px;
+    cursor: pointer;
+    transform: scale(1.005);
 }

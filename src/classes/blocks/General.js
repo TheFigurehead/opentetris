@@ -64,7 +64,7 @@ class General{
 
     }
 
-    move(size, direction = 'down'){
+    move(direction = 'down', size = AppStore.side){
 
         let nextX = this.x;
         let nextY = this.y;
@@ -87,8 +87,7 @@ class General{
         if(this.checkCollision(nextX, nextY)){
             switch(direction){
                 case 'down':
-                    this.freeze();
-                    break;
+                    return this.freeze();
                 default:
                     return false;
             }
@@ -96,6 +95,8 @@ class General{
             this.x = nextX;
             this.y = nextY;
         }
+
+        return true;
     }
 
     checkCollision(nextX, nextY, shape = this.shape){
@@ -146,7 +147,7 @@ class General{
             }
         }
 
-        BlockStore.refreshBlock();         
+        return BlockStore.refreshBlock();       
 
     }
 

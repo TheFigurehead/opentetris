@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My awesome tetris</title>
+        <title>Block Puzzle Classic</title>
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Lemonada|Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <div id="wrapper">
             <div id="panel">
-                <!-- <div class="scoreBlock">
-                    My score: <span class="scoreValue">0</span>
-                </div> -->
                 <button id="pause">
                     <img src="./icons/rounded-pause-button.svg">
                 </button>
@@ -25,31 +23,36 @@
                     <canvas id="nextBlock"></canvas>
                     <span>Total score: <span class="scoreValue">0</span> </span>
                 </div>
-                <!-- <div class="navigation"> -->
-                    <!-- <div class="moveBlock left arrow" data-direction="left">
-                        <span>
-                            <
-                        </span>
-                    </div>
-                    <div class="moveBlock right arrow" data-direction="right">
-                        <span>
-                            >
-                        </span>
-                    </div> -->
-                    <!-- <div class="moveBlock down arrow" data-direction="down">
-                        <span>
-                            >
-                        </span>
-                    </div> -->
-                <!-- </div> -->
             </div>
         </div>
-        <!-- <button id="drawBlock">Draw block</button>
-        <button class="moveBlock" data-direction="up">⇧</button>
-        <button class="moveBlock" data-direction="down">⇩</button>
-        <button class="moveBlock" data-direction="left">⇦</button>
-        <button class="moveBlock" data-direction="right">⇨</button>
-        <button id="rotate">🔄</button> -->
+        <div class="active" id=instructions>
+            <div class="instructions_content">
+                <h2>How to use the app</h2>
+                <section>
+                    <h3>For desktop</h3>
+                    <p>
+                        ↑ - rotate the block, ↓ - move down, ←/→ - left/right <br>
+                        space or <img src="./icons/rounded-pause-button.svg"> button - set pause <br>
+                        backspace or <img src="./icons/restart.svg"> - restart the game<br>
+                    </p>
+                </section>
+                <section>
+                    <h3>For mobile</h3>
+                    <p>
+                        short touch - rotate the block, long touch - move down fast<br>
+                        swipe left/right to move the block <br>
+                        <img src="./icons/rounded-pause-button.svg"> button - set pause <br>
+                        <img src="./icons/restart.svg"> - restart the game<br>
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        You can see the next block and your current score at the bottom of the page.
+                    </p>
+                </section>
+                <button id="confirm_btn">Got it!</button>
+            </div>
+        </div>
         <script type="module" src="./main.js"></script>
     </body>
 </html>

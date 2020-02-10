@@ -63,13 +63,13 @@ class TouchHandler{
     
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {
             if ( xDiff > 0 ) {
-                BlockStore.moveBlock(AppStore.side, 'left')
+                BlockStore.moveBlock('left')
             } else {
-                BlockStore.moveBlock(AppStore.side, 'right')
+                BlockStore.moveBlock('right')
             }                       
         } else {
             if ( yDiff < 0 ) {
-                BlockStore.moveBlock(AppStore.side, 'down')
+                BlockStore.moveBlock('down')
             }                                                                 
         }
     
@@ -100,7 +100,7 @@ class TouchHandler{
         () => {
             this.shorttouch = false;
             if(AppStore.active){
-                BlockStore.moveBlock(AppStore.side, 'down');
+                BlockStore.moveBlock('down');
                 AppStore.checkField();
             }
         }, 100);

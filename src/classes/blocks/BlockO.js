@@ -6,4 +6,8 @@ export default class BlockO extends General{
         this.color = "#ff7043";
         this.borderColor = "#bf360c";
     }
+
+    rotate(){
+        return false;
+    }
 }

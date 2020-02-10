@@ -38,9 +38,14 @@ class BlockStore {
     }
 
     refreshBlock(){
+        if(this.nextBlock.checkCollision(this.nextBlock.x, this.nextBlock.y)){
+            DrawTools.drawEndGame();
+            return false;
+        }
         this.block = this.nextBlock;
         this.nextBlock = this.blockPicker.getRandomBlock(0, 0);
         this.drawNextBlock();
+        return true;
     }
 
     drawNextBlock(){
@@ -65,14 +70,15 @@ class BlockStore {
         this.block.draw();
     }
     
-    moveBlock(size, direction = 'down'){
-        this.block.move(size, direction);
-        this.drawBlock(size);
+    moveBlock(direction = 'down'){
+        if(this.block.move(direction)){
+            this.drawBlock();
+        }
     }
     
     rotate(){
         this.block.rotate();
-        this.drawBlock(AppStore.side)
+        this.drawBlock()
     }
     
     restart(){
