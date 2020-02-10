@@ -2,7 +2,7 @@
 
 You can try the game here: https://blockspuzzleclassic.firebaseapp.com/
 
-<b>First of all, the author of Tetris is Alexey Pajitnov.</b
+<b>First of all, the author of Tetris is Alexey Pajitnov.</b>
 I only made this project for educational purposes.
 The app is built on JavaScript and Canvas.
 
