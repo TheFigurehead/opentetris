@@ -95,6 +95,8 @@ html, body{
     font-size: 18px;
     cursor: pointer;
     transition: all .2s ease-in-out;
+    overflow-y: auto;
+    padding: 20px 0;
 }
 
 #instructions .instructions_content{
